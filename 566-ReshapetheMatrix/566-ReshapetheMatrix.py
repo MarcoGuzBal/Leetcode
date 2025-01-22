@@ -2,7 +2,7 @@ class Solution:
     def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
         
         length = len(mat) * len(mat[0])
-        if (r * c) > length or (r * c) < length: 
+        if (r * c) != length: 
             return mat
 
         flatMatrix = []
