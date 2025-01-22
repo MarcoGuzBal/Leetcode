@@ -1,9 +1,11 @@
 class Solution:
     def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
         
-        Set = set()
+        # O(N*M)
+        # O(N)
 
-        
+        '''
+        Set = set()
 
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
@@ -13,7 +15,6 @@ class Solution:
                     currX, currY = i, j
                     currNum = matrix[currX][currY]
                     while (currX >= 0 and currX < len(matrix)) and (currY >= 0 and currY < len(matrix[0])):
-                        print(f"{currX}, {currY}")
                         if matrix[currX][currY] == currNum:
                             Set.add((i, j))
                             currX += 1
@@ -21,4 +22,11 @@ class Solution:
                         else:
                             return False
 
+        return True
+        '''
+        for i in range(len(matrix) - 1):
+            for j in range(len(matrix[0]) - 1):
+                if matrix[i][j] != matrix[i + 1][j + 1]:
+                    return False
+        
         return True
