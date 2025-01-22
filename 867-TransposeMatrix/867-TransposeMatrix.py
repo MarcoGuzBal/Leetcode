@@ -5,10 +5,6 @@ class Solution:
 
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                print(f"{i}, {j}")
-                if i == j:
-                    result[i][j] = matrix[i][j]
-                else:
                     result[j][i] = matrix[i][j]
         
         return result
