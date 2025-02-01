@@ -6,7 +6,6 @@ class Solution:
 
         while index < len(strs[0]):
             currLetter = strs[0][index]
-            print(currLetter)
             for word in strs:
                 if (len(word) == index) or (word[index] != currLetter):
                     return longestPrefix
