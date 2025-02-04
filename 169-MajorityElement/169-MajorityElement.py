@@ -1,11 +1,13 @@
-from collections import defaultdict
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        hash_count = defaultdict(int)
-        # more than n/2 times
+
+        hashmap = defaultdict(int)
         count = len(nums) // 2
-        for num in nums:
-            hash_count[num] += 1
-            if hash_count[num] > count:
-                return num
-            
+
+        for i in nums:
+            hashmap[i] += 1
+            if hashmap[i] > (count):
+                return i
+                
+
+        
