@@ -1,4 +1,4 @@
-# Last updated: 3/27/2025, 11:07:13 AM
+# Last updated: 3/27/2025, 11:07:28 AM
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -6,14 +6,19 @@
 #         self.next = next
 class Solution:
     def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head.next == None:
-            return None
         
-        prev, slow, fast = None, head, head
+        if not head or not head.next:
+            return None
+
+        temp = ListNode(0, head)
+
+        slow = temp
+        fast = head
+
         while fast and fast.next:
-            prev = slow
             slow = slow.next
             fast = fast.next.next
-            
-        prev.next = slow.next
+
+        slow.next = slow.next.next
+
         return head
