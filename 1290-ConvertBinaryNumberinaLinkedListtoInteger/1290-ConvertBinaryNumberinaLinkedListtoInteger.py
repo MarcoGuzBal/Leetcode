@@ -1,3 +1,4 @@
+# Last updated: 3/29/2025, 2:46:13 PM
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -6,8 +7,8 @@
 class Solution:
     def getDecimalValue(self, head: Optional[ListNode]) -> int:
         length = 0
-        arr = []
         val = 0
+        
         temp = head
         while temp:
             length += 1
