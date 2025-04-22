@@ -1,36 +1,21 @@
-# Last updated: 4/21/2025, 8:57:58 PM
+# Last updated: 4/21/2025, 8:59:42 PM
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-
-        result = []
-
-        left = 0
-        right = 0
-
-        while right < len(nums):
-            
-            if right == len(nums) - 1:
-                if right - left > 0:
-                    result.append(f"{nums[left]}->{nums[right]}")
-                else:
-                    result.append(f"{nums[left]}")
-                break
-
-            elif nums[right + 1] == nums[right] + 1:
-                right += 1
+        if not nums:
+            return []
+        prev = nums[0]
+        rng = [prev]
+        ret = []
+        for i in range(1, len(nums)):
+            if nums[i] - prev > 1:
+                st = str(rng[0]) if rng[0] == rng[len(rng) - 1] else str(rng[0]) + '->' + str(rng[len(rng) - 1])
+                ret.append(st)
+                rng = [nums[i]]
             else:
-                if right - left > 0:
-                    result.append(f"{nums[left]}->{nums[right]}")
-                else:
-                    result.append(f"{nums[left]}")
-                left = right + 1
-                right = left
-
-        return result
-
-
-
-
-
+                rng.append(nums[i])
+            prev = nums[i]
+        st = str(rng[0]) if rng[0] == rng[len(rng) - 1] else str(rng[0]) + '->' + str(rng[len(rng) - 1])
+        ret.append(st)
+        return ret
 
         
