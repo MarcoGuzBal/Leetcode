@@ -1,7 +1,9 @@
-# Last updated: 4/21/2025, 9:09:05 PM
+# Last updated: 4/22/2025, 12:22:22 AM
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        
+        # Brute Force
+        # Time Complexity: O(N^2)
+        # Space Complexity: O()
         counter = {}
         result = []
 
@@ -11,16 +13,17 @@ class Solution:
             else:
                 counter[num] = 1
 
-        print(counter)
+        buckets = [[] for _ in range(len(nums) + 1)]
 
-        for i in range(k):
-            max_val = 0
-            curr_max = 0
-            for val in counter:
-                if counter[val] > max_val:
-                    max_val = counter[val]
-                    curr_max = val
-            result.append(curr_max)
-            del counter[curr_max]
+        for key in counter:
+            buckets[counter[key]].append(key)
 
+
+        for i in range(len(buckets)-1, -1, -1):
+            for num in buckets[i]:
+                result.append(num)
+                k -= 1
+                if k == 0:
+                    return result
+            
         return result
