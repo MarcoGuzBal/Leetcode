@@ -1,4 +1,4 @@
-# Last updated: 6/6/2025, 2:29:09 PM
+# Last updated: 6/6/2025, 2:29:20 PM
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -6,23 +6,22 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        
-        if not head or not head.next:
-            return None
-
-        fast = head
-        slow = head
-
-        for i in range(n):
-            fast = fast.next
-
-        if not fast:
-            return slow.next
-
-        while fast.next:
-            slow = slow.next
-            fast = fast.next
-
-        slow.next = slow.next.next
-
+        curr = head
+        size = 0
+        while curr:
+            size+=1
+            curr = curr.next
+        skipwhen = size - n 
+        print(skipwhen)
+        curr2 = head
+        counter = 0
+        if skipwhen ==0:
+            return head.next
+            
+        while curr2:
+            counter+=1
+            if counter==skipwhen:
+                curr2.next = curr2.next.next
+                break
+            curr2 = curr2.next
         return head
