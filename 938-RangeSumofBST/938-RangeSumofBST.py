@@ -1,4 +1,4 @@
-# Last updated: 6/12/2025, 3:55:26 PM
+# Last updated: 6/12/2025, 3:55:40 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -7,12 +7,20 @@
 #         self.right = right
 class Solution:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        sum = [0]
-        def dfs(node, low, high):
-            if node:
-                dfs(node.left, low, high)
-                if node.val <= high and node.val >= low:
-                    sum[0] += node.val
-                dfs(node.right, low, high)
-        dfs(root, low, high)
-        return sum[0]
+        if root == None:
+            return 0
+        def dfs(node):
+            nonlocal sum
+            if node == None:
+                return 0
+            if low <= node.val <= high:
+                sum = sum + node.val
+            if node.val >= low:
+                dfs(node.left)
+            if node.val <= high:
+                dfs(node.right)
+            
+            
+        sum = 0
+        dfs(root)
+        return sum
