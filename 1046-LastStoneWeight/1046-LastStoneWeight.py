@@ -1,19 +1,20 @@
+# Last updated: 6/23/2025, 5:40:56 PM
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
 
-        heapStones = [-i for i in stones] # Turns values in array negative
+        max_heap = []
 
-        heapq.heapify(heapStones)
+        for stone in stones:
+            heapq.heappush(max_heap, -stone)
 
-        while len(heapStones) > 1:
-            y = -(heapq.heappop(heapStones))
-            x = -(heapq.heappop(heapStones))
+        while len(max_heap) > 1:
+            stone1 = -heapq.heappop(max_heap)
+            stone2 = -heapq.heappop(max_heap)
 
-            print(f"{y} and {x}")
-            print(heapStones)
+            if stone1 != stone2:
+                heapq.heappush(max_heap, -(stone1 - stone2))
 
-            if x != y:
-                heapq.heappush(heapStones, -(y-x))
-            
-        heapStones.append(0)
-        return abs(heapStones[0])
+        if len(max_heap) == 0:
+            return 0
+        else:
+            return -heapq.heappop(max_heap)
