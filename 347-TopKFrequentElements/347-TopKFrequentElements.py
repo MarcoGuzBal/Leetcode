@@ -1,4 +1,4 @@
-# Last updated: 5/28/2025, 9:02:50 PM
+# Last updated: 6/24/2025, 5:03:31 PM
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # Brute Force
@@ -28,32 +28,27 @@ class Solution:
             
         # return result
 
-        hashmap = {}
+        hashmap = Counter(nums)
         result = []
-
-        for num in nums:
-            if num in hashmap:
-                hashmap[num] += 1
-            else:
-                hashmap[num] = 1
-
         buckets = [[] for _ in range(len(nums) + 1)]
+        
+        for key in hashmap:
+            buckets[hashmap[key]].append(key)
 
-        for val in hashmap:
-            index = hashmap[val]
-            buckets[index].append(val)
-
-        print(buckets)
-
-        for i in range(len(buckets) - 1, -1, -1):
-            if len(result) == k:
+        for i in range(len(buckets)-1, -1, -1):
+            bucket = buckets[i]
+            print(bucket)
+            if k == 0:
                 return result
-            while buckets[i]:
-                if len(result) == k:
-                    return result
-                topk = buckets[i].pop()
-                result.append(topk)
-
+            
+            if bucket:
+                for num in buckets[i]:
+                    if k == 0:
+                        return result
+                    result.append(num)
+                    k -= 1
+                    
+        
         
 
 
