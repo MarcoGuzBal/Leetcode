@@ -1,15 +1,18 @@
-# Last updated: 3/31/2025, 2:45:58 PM
+# Last updated: 10/20/2025, 8:35:07 PM
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         
+        # Time Complexity: O(N)
+        # Space Complexity: O(N)
+
+        
         hashmap = {}
 
-        for i in range(len(nums)):
-            diff = target - nums[i]
+        for idx, num in enumerate(nums):
+            remainder = target - num
 
-            if diff in hashmap:
-                return [i, hashmap[diff]]
+            if remainder in hashmap:
+                return [idx, hashmap[remainder]]
             else:
-                hashmap[nums[i]] = i
-
-                
+                hashmap[num] = idx
+            
