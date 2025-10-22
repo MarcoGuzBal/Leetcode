@@ -1,21 +1,22 @@
+# Last updated: 10/22/2025, 12:42:19 PM
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        answer = []
-        left = []
-        right = [0] * len(nums)
-        leftProd = 1
-        rightProd = 1
         
-        for i in range(len(nums)):
-            print(leftProd)
-            left.append(leftProd)
-            leftProd = leftProd * nums[i]
-        for j in range(len(nums)-1, -1, -1):
-            right[j] = rightProd
-            rightProd = rightProd * nums[j]
+        # Naive Solution: iterating through the array and just ignoring the value you are at
+
+        # Optimal: Prefix and Suffix Products
+
+        prefix = [1] * len(nums)
+        suffix = [1] * len(nums)
+        result = [0] * len(nums)
+
+        for i in range(1, len(nums)):
+            prefix[i] = nums[i-1] * prefix[i-1]
+
+        for j in range(len(nums) - 2, -1, -1):
+            suffix[j] = nums[j+1] * suffix[j+1]
 
         for k in range(len(nums)):
-            answer.append(left[k] * right[k])
+            result[k] = prefix[k] * suffix[k]
 
-        return answer
-
+        return result
